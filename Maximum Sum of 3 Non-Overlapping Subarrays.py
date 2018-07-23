@@ -14,6 +14,11 @@
 我们也可以取 [2, 1], 但是结果 [1, 3, 5] 在字典序上更大。
 '''
 
+
+'''
+解题思路：
+区域可被划分为三部分，假设A被划分为了A_sub1,A_sub2,A_sub3.我们令len(A_sub2)的长度为k，滑动该窗口，计算三部分的最大值，只需一次遍历。
+'''
 #动态规划
 
 class Solution(object):
@@ -52,6 +57,6 @@ class Solution(object):
 A=[4,5,10,6,11,17,4,11,1,3]
 k=1
 s=Solution()
-print(s.maxSumOfThreeSubarrays_baoli(A,k))
+print(s.maxSumOfThreeSubarrays(A,k))
 
 
