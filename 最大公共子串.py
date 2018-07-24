@@ -9,23 +9,27 @@
 '''
 
 
-def solution(A,B):
-    l0=0
-    i=len(A)-1
-    j=len(B)-1
-    while i>=0 and j>=0 and A[i]==B[j]:
-        i-=1
-        j-=1
-        l0+=1
-    if len(A)>1 and len(B)>1:
-        l1=solution(A[:i+1],B[:j])
-        l2=solution(A[:i],B[:j+1])
-        return max([l0,l1,l2])
-    else:
-        return l0
+def findLongest(A, n, B, m):
+    c = []
+    for i in range(n + 1):
+        tmp = []
+        for j in range(m + 1):
+            tmp.append(0)
+        c.append(tmp)
+    for i in range(n + 1):
+        for j in range(m + 1):
+            if i == 0 or j == 0:
+                c[i][j] = 0
+            elif A[i - 1] == B[j - 1]:
+                c[i][j] = c[i - 1][j - 1] + 1
+            else:
+                c[i][j] = 0
+    for i in c:
+        print(i)
+    return max([max(i) for i in c])
 
 
-A=[5,5,5,5,5,5,1,2,3,45,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5]
-B=[1,2,3,5,1,35,2,3,45,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6]
+A="1AB2345CD"
+B="12345EF"
 
-print(solution(A,B))
+print(findLongest(A,9,B,7))

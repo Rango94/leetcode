@@ -37,25 +37,27 @@ A和B的公共子序列中长度最长的（包含元素最多的）叫做A和B�
 否则，l=max(L(A,B[:-1]),L(A[:-1],B))
 '''
 
-def solution(A,B):
-    if len(A)>1 and len(B)>1:
-        if A[-1]==B[-1]:
-            return solution(A[:-1],B[:-1])+[A[-1]]
-        else:
-            tmp0=solution(A[:-1],B)
-            tmp1=solution(A,B[:-1])
-            if len(tmp0)>len(tmp1):
-                return tmp0
-            else:
-                return tmp1
-    else:
-        if len(A)==1 and A[-1] in B:
-            return A
-        elif len(B)==1 and B[-1] in A:
-            return B
-        else:
-            return []
-A=[1,2]
-B=[2,3]
 
-print(solution(A,B))
+def findLCS(A, n, B, m):
+    c = []
+    for i in range(n+1):
+        tmp = []
+        for j in range(m+1):
+            tmp.append(0)
+        c.append(tmp)
+    for i in range(n+1):
+        for j in range(m+1):
+            if i == 0 or j == 0:
+                c[i][j]=0
+            elif A[i-1] == B[j-1]:
+                c[i][j] = c[i - 1][j - 1] + 1
+            else:
+                c[i][j] = max([c[i - 1][j], c[i][j - 1]])
+    for i in c:
+        print(i)
+    return c[-1][-1]
+
+A="joneoovzzmuispkgmnhqgdmbchdntanbofhcwftcdnbsyvcragunnopknzazjqoprujqfiesoreslzvgzaed"
+B="oynwkodiovsvkliehbvvggpdydesncaentayeufhoaaildsdwkfpnvxwpsqcujtssriiudgyxstiefyvsp"
+
+print(findLCS(A,84,B,82))
