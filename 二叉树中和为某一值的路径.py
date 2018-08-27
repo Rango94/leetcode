@@ -56,5 +56,5 @@ t10.right=t12
 
 s=Solution()
 print(s.FindPath(t10,22))
-print(s.FindPath(t10,15))
-print(s.FindPath(t10,19))
+# print(s.FindPath(t10,15))
+# print(s.FindPath(t10,19))
